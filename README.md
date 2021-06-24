@@ -1,20 +1,11 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+Accepts POST and HEAD requests. POST Requests with and URI will render a XML Reponse with the CURRI instructions to play the annoucment with same name that is passed to the URI.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+HEAD Requests are just for the keep alives that Cisco Communications Manager sends to check if the ECC URL is up or not.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+# Example
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+https://localhost/MonitoringWarning_00055  will render an XML file that instructs the UCM to play an announcement with the name "MonitoringWarning_00055"
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+# HyeTech Networks
+Designed by Jeff Metcalf 06/24/2021
