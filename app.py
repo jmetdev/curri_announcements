@@ -3,9 +3,13 @@ from flask import render_template
 
 app = Flask(__name__)
 
+
+@app.route('/', methods=['HEAD'])
+def head():
+    return ('', 204)
+
 @app.route('/<greetingName>', methods=['HEAD', 'POST', 'GET'])
-def hello_world(greetingName):
-    #return f'<p>Hello, {greetingName}! </p>'
+def renderCURRI(greetingName):
     return render_template('announcement.xml', name=greetingName)
 
 
