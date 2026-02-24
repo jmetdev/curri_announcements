@@ -1,22 +1,22 @@
 # Introduction
 
-Accepts POST and HEAD requests. A request to a path (e.g. `/<greetingName>`) renders a CURRI XML response that instructs Cisco UCM to play the announcement with that name. The CURRI XML is produced from a **Jinja template** (`templates/announcement.xml`); the greeting name from the URI is passed into the template as `name` (escaped for safety).
-
-HEAD requests to `/` are used for keep-alives that Cisco Communications Manager sends to check if the ECC URL is up.
+This service returns CURRI XML so Cisco UCM can play an announcement. The URL path is the announcement name (e.g. `/MonitoringWarning_00055`). Announcements are managed in UCM under **Media Resources → Announcements**.
 
 # Example
 
-`https://localhost/MonitoringWarning_00055` renders XML that instructs the UCM to play the announcement named `MonitoringWarning_00055`.
+`http://{{ServerIP}}/MonitoringWarning_00055` renders XML that instructs the UCM to play the announcement named `MonitoringWarning_00055`.
 
 # Cisco Call Manager configuration
+
+Luckily Cisco gives us a stock, "Your call is being monitored or recorded message, called MonitoringWarning_00055" If you dont need anything fancy just use that.
 
 Configure the External Call Control profile in UCM so it uses this service:
 
 1. In **Cisco Unified CM Administration**, go to **Call Routing → External Call Control Profile**.
 2. Create or edit a profile (e.g. for call recording announcements).
 3. Set **Primary Web Service** to the base URL of this app plus the greeting name as the path:
-   - Example: `http://10.10.10.10:8000/CallRecord_2026`  
-     UCM will send requests to that URL; this app will respond with CURRI XML for the announcement named `CallRecord_2026`.
+   - Example: `http://10.10.10.10:8000/MonitoringWarning_00055`  
+     UCM will send requests to that URL; this app will respond with CURRI XML for the announcement named `MonitoringWarning_00055`.
 4. **Secondary Web Service** is optional (backup URL).
 5. **Call Treatment on Failures** (e.g. "Allow Calls") controls behavior when this service is unreachable.
 
