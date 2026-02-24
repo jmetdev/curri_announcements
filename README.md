@@ -1,10 +1,15 @@
 # Introduction
 
-This service returns CURRI XML so Cisco UCM can play an announcement. The URL path is the announcement name (e.g. `/MonitoringWarning_00055`). Announcements are managed in UCM under **Media Resources → Announcements**.
+This service returns CURRI XML so Cisco UCM can play an announcement. 
+
+The URL path is the announcement name (e.g. `/MonitoringWarning_00055`). Announcements are managed in UCM under **Media Resources → Announcements**.
 
 # Example
 
 `http://{{ServerIP}}/MonitoringWarning_00055` renders XML that instructs the UCM to play the announcement named `MonitoringWarning_00055`.
+
+# One More Thing
+The service also responds a 204 (OK No Content) to HEAD requests at the root URL http://{{ServerIP}}. This is a health check that UCM performs to ensure the service is running. If the service isn't responding, it won't send the full routing request.
 
 # Cisco Call Manager configuration
 
