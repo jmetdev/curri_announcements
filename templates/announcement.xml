@@ -9,7 +9,7 @@
                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">
                                         &lt;cixml version="1.0"&gt;
                                                 &lt;continue&gt;
-                                                        &lt;greeting identification={{ name }}&gt;
+                                                        &lt;greeting identification={{ name | e }}&gt;
                                                 &lt;/continue&gt;
                                         &lt;/cixml&gt;
                                         </AttributeValue>

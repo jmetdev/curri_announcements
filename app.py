@@ -1,7 +1,11 @@
-from flask import Flask
-from flask import render_template
+import re
+
+from flask import Flask, abort, render_template, Response
 
 app = Flask(__name__)
+
+# UCM greeting names: alphanumeric, underscore, hyphen only
+GREETING_NAME_RE = re.compile(r"^[a-zA-Z0-9_-]+$")
 
 
 @app.route("/", methods=["HEAD"])
@@ -11,7 +15,11 @@ def head():
 
 @app.route("/<greetingName>", methods=["HEAD", "POST", "GET"])
 def renderCURRI(greetingName):
-    return render_template("announcement.xml", name=greetingName)
+    if not GREETING_NAME_RE.match(greetingName):
+        abort(400)
+    body = render_template("announcement.xml", name=greetingName)
+    return Response(body, mimetype="application/xml")
 
 
-app.run()
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
